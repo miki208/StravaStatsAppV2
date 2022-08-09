@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StravaController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +20,8 @@ Route::get('/', function () {
     return redirect('register');
 });
 
-Route::get('/register', function () {
-    return view('register', [
-        'client_id' => config('strava-service.client-id'),
-        'redirect_uri' => config('app.url') . config('strava-service.authorization-callback-url')
-    ]);
-});
-
 Route::get(config('strava-service.authorization-callback-url'), [StravaController::class, 'authorization_grant_callback']);
 
-Route::get('/registration_successful', [StravaController::class, 'registration_successful']);
-
-Route::get('/registration_failed', [StravaController::class, 'registration_failed']);
+Route::get('/register', [RegistrationController::class, 'register_user']);
+Route::get('/registration_successful', [RegistrationController::class, 'registration_successful']);
+Route::get('/registration_failed', [RegistrationController::class, 'registration_failed']);
