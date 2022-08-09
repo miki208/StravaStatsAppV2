@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<p id="info_msg">Registration failed: {{ $error_message }}</p>
+    <p id="info_msg">Registration failed: {{ $error_message }}</p>
 </body>
 
 </html>

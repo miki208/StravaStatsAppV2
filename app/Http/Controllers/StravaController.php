@@ -97,12 +97,12 @@ class StravaController extends Controller
 
             $user = new User;
 
-            $user->name = $athlete_info['first_name'] ?? '';
-
             $user->user_id = $athlete_info['id'];
             $user->access_token = $access_token;
             $user->refresh_token = $refresh_token;
             $user->expires_at = $expires_at;
+
+            $user->name = $athlete_info['firstname'] ?? '';
 
             $user->save();
 
