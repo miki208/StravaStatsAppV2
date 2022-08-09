@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <p id="info_msg">Registration is successful. Now you can close this window, synchronization with the Strava will be done automatically.</p>
+    <p id="info_msg">Hello {{ $name }}! Registration is successful. Now you can close this window, synchronization with the Strava will be done automatically.</p>
 </body>
 
 </html>

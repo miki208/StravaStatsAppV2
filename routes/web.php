@@ -28,8 +28,6 @@ Route::get('/register', function () {
 
 Route::get(config('strava-service.authorization-callback-url'), [StravaController::class, 'authorization_grant_callback']);
 
-Route::get('/registration_successful', function () {
-    return view('registration_successful');
-});
+Route::get('/registration_successful', [StravaController::class, 'registration_successful']);
 
 Route::get('/registration_failed', [StravaController::class, 'registration_failed']);

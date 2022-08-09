@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigInteger('user_id');
+
+            $table->string('name');
+
             $table->string('access_token');
             $table->string('refresh_token');
             $table->bigInteger('expires_at');

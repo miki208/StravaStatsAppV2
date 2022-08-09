@@ -97,19 +97,21 @@ class StravaController extends Controller
 
             $user = new User;
 
+            $user->name = $athlete_info['first_name'] ?? '';
+
             $user->user_id = $athlete_info['id'];
             $user->access_token = $access_token;
             $user->refresh_token = $refresh_token;
             $user->expires_at = $expires_at;
 
             $user->save();
+
+            return redirect('registration_successful')->with('name', $user->name);
         }
         else
         {
             return redirect('registration_failed')->with('error_code', 'already_registered');
         }
-
-        return redirect('registration_successful');
     }
 
     public function registration_failed(Request $request)
@@ -135,5 +137,21 @@ class StravaController extends Controller
         return view('registration_failed', [
             'error_message' => $err_msg
         ]);
+    }
+
+    public function registration_successful(Request $request)
+    {
+        if(!$request->session()->has('name'))
+        {
+            return redirect('register');
+        }
+        else
+        {
+            $name = $request->session()->get('name');
+
+            return view('registration_successful', [
+               'name' => $name
+            ]);
+        }
     }
 }
