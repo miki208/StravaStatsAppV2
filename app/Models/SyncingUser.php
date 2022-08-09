@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class SyncingUser extends Model
 {
-    public function IsSynced() : bool
+    public function user()
     {
-        return !$this->hasOne(SyncingUser::class, 'user_id', 'user_id')->exists();
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     protected $primaryKey = 'user_id';

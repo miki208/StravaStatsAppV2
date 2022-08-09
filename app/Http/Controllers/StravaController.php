@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\ConnectionException;
 
 use App\Models\User;
+use App\Models\SyncingUser;
 
 class StravaController extends Controller
 {
@@ -96,6 +97,14 @@ class StravaController extends Controller
 
             $user->save();
 
+            //--- mark the user for sync
+            $syncingUser = new SyncingUser;
+
+            $syncingUser->user_id = $user->user_id;
+            $syncingUser->timestamp_of_last_synced_activity = 0;
+
+            $syncingUser->save();
+            
             return redirect('registration_successful')->with('name', $user->name);
         }
         else
